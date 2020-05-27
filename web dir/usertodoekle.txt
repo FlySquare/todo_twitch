@@ -1,0 +1,32 @@
+<div class="overlay">
+  <p>Add task</p><span>Fill at least the title of the task, description is not required 😁</span>
+  <form class="modal">
+    <label for="task-title">Title</label>
+    <input id="task-title" type="text"/>
+    <label for="task-desc">Description</label>
+    <textarea id="task-desc" rows="3"></textarea><span>Priority</span>
+    <div class="priority">
+      <input id="high" type="radio" name="priority" value="high"/>
+      <label for="high">High</label>
+      <input id="medium" type="radio" name="priority" value="medium" checked="checked"/>
+      <label for="medium">Medium</label>
+      <input id="low" type="radio" name="priority" value="low"/>
+      <label for="low">Low</label>
+    </div>
+    <div class="modal-btns">
+      <button class="btn-add-task">Add</button>
+      <div class="btn-cancel-task">Cancel</div>
+    </div>
+  </form>
+</div>
+
+
+
+<label class="btn-toggle-modal" for="ipt-toggle-modal"><span>+</span></label>
+
+
+//todoeditleme
+
+<div class="btn-edit-task" title="Edit task" onclick="editTask(event, this)">
+  <ion-icon name="create"></ion-icon>
+</div>
