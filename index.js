@@ -39,18 +39,18 @@ client.on('connected', function (address, port) {
         if(message.startsWith(prefix)){
           var input = message.split('!todo')[1];
           if (input.count < 2) return;
-              client.action(chnl,""+ input);  
+              
               var usernames = user["username"];
               var sqlSorgusu5 = `INSERT INTO todo_todo (todo_sahip,todo_icerik) VALUES ('`+usernames+`','`+input+`')`;
-  
-    connection5.connect();
+
+              
+        
   
     connection5.query(sqlSorgusu5, function (error5, results, fields) {
       if (error5) throw error5;
       console.log('TODO EKLENDİ');
     });
-     
-    connection5.end();
+
 
         }
     }

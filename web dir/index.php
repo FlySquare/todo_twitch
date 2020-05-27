@@ -2,6 +2,9 @@
 include 'db/db.php';
 $todosor=$db->prepare("SELECT * FROM todo_todo where todo_durum = 1");
 $todosor->execute();
+
+
+
  ?>
 
 <!DOCTYPE html>
@@ -31,9 +34,13 @@ $todosor->execute();
         </div>
         <div class="right-side">
 
-          <div class="btn-complete-task" title="Complete task" onclick="completeTask(event, this)">
-            <ion-icon name="checkmark"></ion-icon>
-          </div>
+            <div name="taskok" class="btn-complete-task" title="Complete task" onclick="completeTask(event, this)">
+            
+                <ion-icon name="checkmark"></ion-icon>
+
+            </div>
+
+
           <div class="btn-remove-task" title="Remove task" onclick="removeTask(event, this)">
             <ion-icon name="trash"></ion-icon>
           </div>
