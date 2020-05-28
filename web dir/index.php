@@ -2,9 +2,35 @@
 include 'db/db.php';
 $todosor=$db->prepare("SELECT * FROM todo_todo where todo_durum = 1");
 $todosor->execute();
+error_reporting(0);
+if($_GET['tamam']){
+  sleep(1);
+  $silid = $_GET['tamam'];
+  $query = $db->prepare("UPDATE todo_todo SET
+todo_durum = :todo_durum
+WHERE todo_id = $silid");
+$update = $query->execute(array(
+     "todo_durum" => 3
 
+));
+if ( $update ){
+     header("Location: /");
+}
+}
+if($_GET['sil']){
+  sleep(1);
+  $silid = $_GET['sil'];
+  $query = $db->prepare("UPDATE todo_todo SET
+todo_durum = :todo_durum
+WHERE todo_id = $silid");
+$update = $query->execute(array(
+     "todo_durum" => 0
 
-
+));
+if ( $update ){
+     header("Location: /");
+}
+}
  ?>
 
 <!DOCTYPE html>
@@ -22,6 +48,7 @@ $todosor->execute();
   <div class="header">
     <h1>KelHub - twitch.tv/kelhub</h1>
   </div>
+
   <input id="ipt-toggle-modal" type="checkbox"/>
   <div class="notification">Task edited successfully</div>
   <div class="tasks">
@@ -32,17 +59,17 @@ $todosor->execute();
         <div class="left-side">
           <ion-icon name="flame" data-priority="high"></ion-icon><span class="task-title"><?php echo $todocek['todo_sahip']; ?></span>
         </div>
-        <div class="right-side">
+        <div  class="right-side">
 
-            <div name="taskok" class="btn-complete-task" title="Complete task" onclick="completeTask(event, this)">
-            
-                <ion-icon name="checkmark"></ion-icon>
+            <div onclick="completeTask(event, this)"  name="taskok" class="btn-complete-task" title="Complete task">
+
+                <ion-icon onClick="parent.location='index.php?tamam=<?php echo $todocek['todo_id']; ?>'" name="checkmark"></ion-icon>
 
             </div>
 
 
-          <div class="btn-remove-task" title="Remove task" onclick="removeTask(event, this)">
-            <ion-icon name="trash"></ion-icon>
+          <div onclick="removeTask(event, this)" class="btn-remove-task" title="Remove task" >
+            <ion-icon onClick="parent.location='index.php?sil=<?php echo $todocek['todo_id']; ?>'" name="trash"></ion-icon>
           </div>
         </div>
       </div>
@@ -53,27 +80,7 @@ $todosor->execute();
 <?php } ?>
 
   </div>
-  <div class="overlay">
-    <p>Add task</p><span>Fill at least the title of the task, description is not required 😁</span>
-    <form class="modal">
-      <label for="task-title">Title</label>
-      <input id="task-title" type="text"/>
-      <label for="task-desc">Description</label>
-      <textarea id="task-desc" rows="3"></textarea><span>Priority</span>
-      <div class="priority">
-        <input id="high" type="radio" name="priority" value="high"/>
-        <label for="high">High</label>
-        <input id="medium" type="radio" name="priority" value="medium" checked="checked"/>
-        <label for="medium">Medium</label>
-        <input id="low" type="radio" name="priority" value="low"/>
-        <label for="low">Low</label>
-      </div>
-      <div class="modal-btns">
-        <button class="btn-add-task">Add</button>
-        <div class="btn-cancel-task">Cancel</div>
-      </div>
-    </form>
-  </div>
+
 </div>
 <!-- partial -->
   <script src='https://unpkg.com/ionicons@4.5.5/dist/ionicons.js'></script>

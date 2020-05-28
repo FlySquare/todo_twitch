@@ -356,7 +356,7 @@ function removeTask(evt, el) {
   const task = btn.parentNode.parentNode.parentNode;
   let taskStatus = task.querySelector('.task-status');
 
-  taskStatus.innerText = 'Task removed';
+  taskStatus.innerText = 'Görev Silindi';
 
   task.classList.add('-is-removed');
 
